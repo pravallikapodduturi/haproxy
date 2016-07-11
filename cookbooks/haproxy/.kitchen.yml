@@ -1,0 +1,28 @@
+driver:
+  name: vagrant
+
+busser:
+  sudo: true
+
+provisioner:
+  name: chef_zero
+  roles_path: "test/chef-zero/roles"
+  environments_path: "test/chef-zero/environments"
+  nodes_path: "test/chef-zero/nodes"
+  client_rb:
+    environment: test
+
+platforms:
+  - name: ubuntu-14.04
+    busser:
+      sudo: true
+    driver:
+      customize:
+        memory: 256
+suites:
+  - name: default
+    busser:
+      sudo: true
+    run_list:
+      - recipe[haproxy::default]
+    attributes:
